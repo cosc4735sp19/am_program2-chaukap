@@ -1,7 +1,7 @@
-# Program # X
-Name:  
+# Program # 2
+Name:  Chandler Haukap
 Cosc 4735
 
-Description:  (how to run the program, phone/emulator screen size, android version ie 7.0)
+Description:  Run on class Pixel 2
 
 Anything that doesn't work:
