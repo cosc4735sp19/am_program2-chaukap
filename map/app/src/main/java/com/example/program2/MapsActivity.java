@@ -66,35 +66,6 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMyLoca
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
     }
 
-    /*
-    @Override
-    protected void onResume() {
-        super.onResume();
-        setContentView(R.layout.activity_maps);
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                open();
-            }
-        });
-
-        if(myImages == null){
-            myImages = new ArrayList<>();
-        }
-
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
-
-        mapFragment.getMapAsync(this);
-
-        if(mFusedLocationClient == null){
-            mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-        }
-    }
-*/
-
     /**
      * Manipulates the map once available.
      * This callback is triggered when the map is ready to be used.
@@ -154,6 +125,13 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMyLoca
                                         }
                                     }
                                 });
+                    } else {
+                        GeoPic newPic = new GeoPic(bp, new Location(""));
+                        LatLng newLatLng = new LatLng(50, 50);
+                        mMap.addMarker(new MarkerOptions()
+                                .position(newLatLng)
+                                .title("" + myImages.size()));
+                        myImages.add(newPic);
                     }
                 } else {
                     Toast.makeText(this, "No picture was returned", Toast.LENGTH_SHORT).show();
@@ -182,4 +160,23 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMyLoca
         startActivity(intent);
         return false;
     }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case 1: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    mMap.setMyLocationEnabled(true);
+                } else {
+                    Toast.makeText(this, "Ok, but all your markers will be in Kazakhstan", Toast.LENGTH_LONG).show();
+                }
+                return;
+            }
+
+        }
+    }
+
 }
