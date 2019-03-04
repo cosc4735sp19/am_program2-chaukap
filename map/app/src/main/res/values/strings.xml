@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Program2</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="title_activity_picture_display">PictureDisplayActivity</string>
+</resources>
